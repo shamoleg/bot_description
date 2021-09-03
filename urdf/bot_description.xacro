@@ -43,7 +43,7 @@
 
 <link name="front_left_wheel_link">
   <xacro:solid_cylinder_inertial
-  rpy="0 0 0" xyz="0 0 0" mass="0.1" radius="${wheel_radius}" length="0.08"
+  rpy="0 0 0" xyz="0 0 0" mass="1" radius="${wheel_radius}" length="0.08"
   />
 
   <visual>

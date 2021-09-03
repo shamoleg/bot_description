@@ -96,19 +96,6 @@
     </sensor>
   </gazebo>
 
-  <xacro:macro name="set_wheel_friction" params="link friction">
-    <gazebo reference="${link}">
-      <mu1 value="${friction}"/>
-      <mu2 value="${friction}"/>
-      <kp value="100000.0"/>
-      <kd value="10.0"/>
-      <material>Gazebo/Red</material>
-    </gazebo>
-  </xacro:macro>
-
-
-  <xacro:set_wheel_friction link="back_wheel_link" friction="0.01"/>
-
 
 
 </robot>
