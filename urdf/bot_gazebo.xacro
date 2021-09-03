@@ -1,0 +1,6 @@
+<robot name="coursebot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+  
+  <xacro:include filename="$(find bot_description)/urdf/bot_description.xacro"/>
+  <xacro:include filename="$(find bot_description)/urdf/gazebo_plagin.xacro"/>
+
+</robot>

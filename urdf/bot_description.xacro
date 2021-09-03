@@ -1,0 +1,179 @@
+<robot name="bot" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+<xacro:include filename="$(find bot_description)/urdf/inertials.xacro"/>
+
+<xacro:property name="wheel_radius" value="0.08"/>
+
+<material name="blue">
+  <color rgba="0 0.3 1.0 1.0"/>
+</material>
+<material name="red">
+  <color rgba="1 0 0 1.0"/>
+</material>
+
+<link name="base_footprint"/>
+
+<link name="base_link">
+  <xacro:solid_cuboid_inertial
+    rpy="0 0 0" xyz="0 0 0" mass="0.4" x="0.6" y="0.4" z="0.02"
+  /> 
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="0.6 0.4 0.02" />
+    </geometry>
+    <material name="blue"/>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.6 0.4 0.02" />
+    </geometry>
+  </collision>
+</link>
+
+<joint name="base_footprint_to_base_link" type="fixed">
+  <origin xyz="-0.2 0 0 " rpy="0 0 0 "/>
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+</joint>
+
+<link name="front_left_wheel_link">
+  <xacro:solid_cylinder_inertial
+  rpy="0 0 0" xyz="0 0 0" mass="0.1" radius="${wheel_radius}" length="0.08"
+  />
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <cylinder radius="${wheel_radius}" length="0.08"/>
+    </geometry>
+    <material name="red"/>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <cylinder radius="${wheel_radius}" length="0.08"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="base_to_front_left_wheel_joint" type="continuous">
+  <origin xyz="0.2 0.2 0" rpy="-1.57 0 0 "/>
+  <parent link="base_link"/>
+  <child link="front_left_wheel_link"/>
+  <axis xyz="0 0 1"/>
+</joint>
+
+<link name="front_right_wheel_link">
+  <xacro:solid_cylinder_inertial
+  rpy="0 0 0" xyz="0 0 0" mass="1" radius="${wheel_radius}" length="0.08"
+  />
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <cylinder radius="${wheel_radius}" length="0.08"/>
+    </geometry>
+    <material name="red">
+      <color rgba="1 0 0 1.0"/>
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <cylinder radius="${wheel_radius}" length="0.08"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="base_to_front_right_wheel_joint" type="continuous">
+  <origin xyz="0.2 -0.2 0 " rpy="-1.57 0 0 "/>
+  <parent link="base_link"/>
+  <child link="front_right_wheel_link"/>
+  <axis xyz="0 0 1"/>
+</joint>
+
+<link name="back_wheel_link">
+  <xacro:solid_sphere_inertial
+  rpy="0 0 0" xyz="0 0 0" mass="0.02" radius="0.04"
+  />
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <sphere radius="0.04"/>
+    </geometry>
+    <material name="red"/>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <sphere radius="0.04"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="base_link_to_back_wheel_link" type="fixed">
+  <origin xyz="-0.2 0 -0.04" rpy="0 0 0 "/>
+  <parent link="base_link"/>
+  <child link="back_wheel_link"/>
+</joint>
+
+<link name="camera_link">
+  <xacro:null_inertial/>
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="0.06 0.06 0.06" />
+    </geometry>
+    <material name="blue"/>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.06 0.06 0.06" />
+    </geometry>
+  </collision>
+</link>
+
+<joint name="base_link_to_camera_link" type="fixed">
+  <origin xyz="0.1 0 0.16" rpy="0 0 0 "/>
+  <parent link="base_link"/>
+  <child link="camera_link"/>
+</joint>
+
+<link name="lidar_link">
+  <xacro:null_inertial/>
+
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <cylinder radius="0.04" length="0.04"/>
+    </geometry>
+    <material name="blue"/>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.06 0.06 0.06" />
+    </geometry>
+  </collision>
+</link>
+
+<joint name="base_link_to_lidar_link" type="fixed">
+  <origin xyz="0 0 0.24" rpy="0 0 0 "/>
+  <parent link="base_link"/>
+  <child link="lidar_link"/>
+</joint>
+
+</robot>
