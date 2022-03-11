@@ -1,7 +1,5 @@
 <launch>
-
-
-    <arg name="model" default="$(find bot_description)/urdf/description.urdf"/>
+    <arg name="model" default="$(find bot_description)/urdf/bot_description.xacro"/>
 
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
 

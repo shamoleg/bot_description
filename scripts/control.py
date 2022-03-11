@@ -1,13 +1,11 @@
 #! /usr/bin/env python3
-from os import lseek, name
 
-from numpy.lib.function_base import select
-import rospy, math, numpy as np
+import rospy
+import numpy as np
 from geometry_msgs.msg import Point, Twist
-from nav_msgs.msg import Odometry
-from rospy import topics
-from rospy.core import is_shutdown
 from sensor_msgs.msg import LaserScan
+from nav_msgs.msg import Odometry
+
 from tf.transformations import euler_from_quaternion
 from math import atan2
 
